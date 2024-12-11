@@ -21,5 +21,5 @@ const tweet = async (message: string) => {
   }
 };
 
-const message = "これは自動投稿されたツイートです。";
+const message = "dさdさsだ";
 tweet(message);
