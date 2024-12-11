@@ -1,6 +1,7 @@
 name: Tweet Bot
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "42 * * * *" # 毎時0分に実行
 
