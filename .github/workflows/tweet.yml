@@ -22,8 +22,8 @@ jobs:
 
       - name: Run tweet script
         env:
-          TWITTER_APP_KEY: ${{ secrets.CONSUMER_API_KEY }}
-          TWITTER_APP_SECRET: ${{ secrets.CONSUMER_API_SECRET }}
-          TWITTER_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          TWITTER_ACCESS_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          CONSUMER_API_KEY: ${{ secrets.CONSUMER_API_KEY }}
+          CONSUMER_API_SECRET: ${{ secrets.CONSUMER_API_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
         run: npx ts-node tweet.ts
