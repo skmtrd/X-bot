@@ -116,7 +116,7 @@ const main = async () => {
     return;
   }
 
-  //   await tweet(formatDeadlineNotifications(filteredAssignments));
+  await tweet(formatDeadlineNotifications(filteredAssignments));
 };
 
 main();
