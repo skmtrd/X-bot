@@ -64,6 +64,8 @@ function convertTime(dateStr: string) {
     .toISOString()
     .replace("Z", "+09:00");
 
+  console.log("JSTDate:", JSTDate);
+  console.log("Parsed JSTDate:", parseISO(JSTDate));
   return parseISO(JSTDate);
 }
 
