@@ -71,13 +71,13 @@ const main = async () => {
   const assignments = await fetchAssignments();
   const now = new Date();
   const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-  console.log(now);
-  console.log(oneHourLater);
 
   const filteredAssignments = assignments.filter((assignment) => {
     const deadLineDate = convertTime(assignment.deadLine);
     return deadLineDate >= now && deadLineDate <= oneHourLater;
   });
+
+  console.log(filteredAssignments);
 
   if (filteredAssignments.length === 0) {
     return;
