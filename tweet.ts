@@ -21,5 +21,7 @@ const tweet = async (message: string) => {
   }
 };
 
-const message = "dさdさsだ";
+const now_date = new Date();
+const message = `ただいまの時刻は${now_date.getHours()}時${now_date.getMinutes()}分です。`;
+
 tweet(message);

@@ -2,8 +2,6 @@ name: Tweet Bot
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '7 * * * *'
 
 jobs:
   tweet:
