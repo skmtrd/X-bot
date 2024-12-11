@@ -60,9 +60,7 @@ export const fetchAssignments = async (): Promise<Assignment[]> => {
 
 function convertTime(dateStr: string) {
   const date = new Date(dateStr.replace("/", "T"));
-  const JSTDate = new Date(date.getTime() + 9 * 60 * 60 * 1000)
-    .toISOString()
-    .replace("Z", "+09:00");
+  const JSTDate = new Date(date.getTime()).toISOString().replace("Z", "+09:00");
 
   console.log("JSTDate:", JSTDate);
   console.log("Parsed JSTDate:", parseISO(JSTDate));
