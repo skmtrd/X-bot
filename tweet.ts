@@ -106,8 +106,7 @@ const main = async () => {
     return isInRange;
   });
 
-  // if (now.getHours() === 15) {
-  if (true) {
+  if (now.getHours() === 15) {
     const todayAssignments = assignments.filter((assignment) => {
       const deadLineDate = convertTime(assignment.deadLine);
       return (
@@ -117,8 +116,7 @@ const main = async () => {
     });
 
     if (todayAssignments.length > 0) {
-      // await tweet(formatTodayNotifications(todayAssignments));
-      console.log(formatTodayNotifications(todayAssignments));
+      await tweet(formatTodayNotifications(todayAssignments));
     }
   }
 
