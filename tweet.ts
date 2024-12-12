@@ -44,6 +44,24 @@ const formatDeadlineNotifications = (assignments: Assignment[]): string => {
   return `${header}${formattedAssignments}`.trim();
 };
 
+const formatTodayNotifications = (assignments: Assignment[]): string => {
+  if (assignments.length === 0) {
+    return "今日提出の課題はありません";
+  }
+  const header = "提出期限が今日までの課題があります\n";
+
+  const formattedAssignments = assignments
+    .map(
+      (assignment, index) => `
+  ${index + 1}. ${assignment.title}
+  ⏰ 期限: ${assignment.deadLine}
+  ────────────`
+    )
+    .join("\n");
+
+  return `${header}${formattedAssignments}`.trim();
+};
+
 export const fetchAssignments = async (): Promise<Assignment[]> => {
   try {
     const response = await fetch("https://iniad-sns.vercel.app/api/assignment");
@@ -68,16 +86,15 @@ function convertTime(dateStr: string) {
 }
 
 const main = async () => {
-  console.log("Fetching assignments...");
+  //課題情報を取得
   const assignments = await fetchAssignments();
-  console.log("All assignments:", assignments);
 
+  //現在時刻を取得
   const now = new Date();
-  console.log("Current time:", now.toISOString());
-
+  //一時間後の時刻を取得
   const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-  console.log("One hour later:", oneHourLater.toISOString());
 
+  //現在時刻から一時間後の時刻までの課題を取得
   const filteredAssignments = assignments.filter((assignment) => {
     const deadLineDate = convertTime(assignment.deadLine);
     console.log(
@@ -86,14 +103,27 @@ const main = async () => {
       deadLineDate.toISOString()
     );
     const isInRange = deadLineDate >= now && deadLineDate <= oneHourLater;
-    console.log("Is in range:", isInRange);
     return isInRange;
   });
 
-  console.log("Filtered assignments:", filteredAssignments);
+  // if (now.getHours() === 15) {
+  if (true) {
+    const todayAssignments = assignments.filter((assignment) => {
+      const deadLineDate = convertTime(assignment.deadLine);
+      return (
+        deadLineDate.toISOString().split("T")[0] ===
+        now.toISOString().split("T")[0]
+      );
+    });
 
+    if (todayAssignments.length > 0) {
+      // await tweet(formatTodayNotifications(todayAssignments));
+      console.log(formatTodayNotifications(todayAssignments));
+    }
+  }
+
+  //もし一時間後の時刻までの課題がなかったらreturn
   if (filteredAssignments.length === 0) {
-    console.log("No assignments within the time range");
     return;
   }
 
