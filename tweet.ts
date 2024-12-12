@@ -67,35 +67,16 @@ function convertTime(dateStr: string) {
   return parseISO(JSTDate);
 }
 
-// const main = async () => {
-//   const assignments = await fetchAssignments();
-//   const now = new Date();
-//   const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-
-//   const filteredAssignments = assignments.filter((assignment) => {
-//     const deadLineDate = convertTime(assignment.deadLine);
-//     return deadLineDate >= now && deadLineDate <= oneHourLater;
-//   });
-
-//   console.log(filteredAssignments);
-
-//   if (filteredAssignments.length === 0) {
-//     return;
-//   }
-
-//   await tweet(formatDeadlineNotifications(filteredAssignments));
-// };
-
 const main = async () => {
   console.log("Fetching assignments...");
   const assignments = await fetchAssignments();
-  console.log("All assignments:", assignments); // すべての課題をログ出力
+  console.log("All assignments:", assignments);
 
   const now = new Date();
-  console.log("Current time:", now.toISOString()); // 現在時刻をログ出力
+  console.log("Current time:", now.toISOString());
 
   const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-  console.log("One hour later:", oneHourLater.toISOString()); // 1時間後をログ出力
+  console.log("One hour later:", oneHourLater.toISOString());
 
   const filteredAssignments = assignments.filter((assignment) => {
     const deadLineDate = convertTime(assignment.deadLine);
@@ -103,7 +84,7 @@ const main = async () => {
       "Assignment deadline:",
       assignment.title,
       deadLineDate.toISOString()
-    ); // 各課題の期限をログ出力
+    );
     const isInRange = deadLineDate >= now && deadLineDate <= oneHourLater;
     console.log("Is in range:", isInRange);
     return isInRange;
