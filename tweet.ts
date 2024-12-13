@@ -106,18 +106,22 @@ const main = async () => {
     return isInRange;
   });
 
-  if (now.getHours() === 15) {
+  // if (now.getHours() === 15) {
+  if (true) {
     const todayAssignments = assignments.filter((assignment) => {
       const deadLineDate = convertTime(assignment.deadLine);
+      const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+
       return (
         deadLineDate.toISOString().split("T")[0] ===
-        now.toISOString().split("T")[0]
+        tomorrow.toISOString().split("T")[0]
       );
     });
+    console.log(todayAssignments);
 
-    if (todayAssignments.length > 0) {
-      await tweet(formatTodayNotifications(todayAssignments));
-    }
+    // if (todayAssignments.length > 0) {
+    //   await tweet(formatTodayNotifications(todayAssignments));
+    // }
   }
 
   //もし一時間後の時刻までの課題がなかったらreturn
